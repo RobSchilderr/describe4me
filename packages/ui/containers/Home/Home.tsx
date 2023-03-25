@@ -8,15 +8,15 @@ import React, { useRef, useState } from 'react'
 
 const Home = () => {
   const [loading, setLoading] = useState(false)
-  const [bio, setBio] = useState('')
+  const [description, setDescription] = useState('')
   const [vibe, setVibe] = useState<VibeType>('Funny')
-  const [generatedBios, setGeneratedBios] = useState<String>('')
+  const [generatedDescription, setGeneratedDescription] = useState<String>('')
 
-  const bioRef = useRef<null | HTMLDivElement>(null)
+  const descriptionRef = useRef<null | HTMLDivElement>(null)
 
-  const scrollToBios = () => {
-    if (bioRef.current !== null) {
-      bioRef.current.scrollIntoView({ behavior: 'smooth' })
+  const scrollToDescriptions = () => {
+    if (descriptionRef.current !== null) {
+      descriptionRef.current.scrollIntoView({ behavior: 'smooth' })
     }
   }
 
@@ -25,13 +25,13 @@ const Home = () => {
       ? "Make sure there is a joke in there and it's a little ridiculous."
       : null
   }
-      Make sure each generated description is less than 800 words, has catchy sentences that are found in descriptions, and base them on this context: ${bio}${
-    bio.slice(-1) === '.' ? '' : '.'
+      Make sure each generated description is less than 800 words, has catchy sentences that are found in descriptions, and base them on this context: ${description}${
+    description.slice(-1) === '.' ? '' : '.'
   }`
 
-  const generateBio = async (e: any) => {
+  const generatedescription = async (e: any) => {
     e.preventDefault()
-    setGeneratedBios('')
+    setGeneratedDescription('')
     setLoading(true)
     try {
       console.log('we here')
@@ -47,11 +47,9 @@ const Home = () => {
       console.log('response', response)
 
       if (!response.ok) {
-        console.log(response)
         throw new Error(response.statusText)
       }
 
-      console.log(response, 'response')
       // This data is a ReadableStream
       const data = response.body
       if (!data) {
@@ -66,12 +64,11 @@ const Home = () => {
         const { value, done: doneReading } = await reader.read()
         done = doneReading
         const chunkValue = decoder.decode(value)
-        console.log('Result:', chunkValue)
 
-        setGeneratedBios(prev => prev + chunkValue)
+        setGeneratedDescription(prev => prev + chunkValue)
       }
 
-      scrollToBios()
+      scrollToDescriptions()
       setLoading(false)
     } catch (error) {
       console.log(error)
@@ -83,7 +80,7 @@ const Home = () => {
   return (
     <div className="flex flex-col items-center justify-center max-w-5xl min-h-screen py-2 mx-auto">
       <Head>
-        <title>Twitter Bio Generator</title>
+        <title>Descriptions Generator</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -91,7 +88,7 @@ const Home = () => {
       <main className="flex flex-col items-center justify-center flex-1 w-full px-4 mt-12 text-center sm:mt-20">
         {/* <a
           className="flex items-center justify-center px-4 py-2 mb-5 space-x-2 text-sm text-gray-600 transition-colors bg-white border border-gray-300 rounded-full shadow-md max-w-fit hover:bg-gray-100"
-          href="https://github.com/Nutlope/twitterbio"
+          href="https://github.com/Nutlope/twitterdescription"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -118,8 +115,8 @@ const Home = () => {
             </p>
           </div>
           <textarea
-            value={bio}
-            onChange={e => setBio(e.target.value)}
+            value={description}
+            onChange={e => setDescription(e.target.value)}
             rows={4}
             className="w-full my-5 border-gray-300 rounded-md shadow-sm focus:border-black focus:ring-black"
             placeholder="e.g.  a self made herring salad prepared in Amsterdam with the fish from the North Sea. Good to eat with a genever on the side."
@@ -135,7 +132,7 @@ const Home = () => {
           {!loading && (
             <button
               className="w-full px-4 py-2 mt-8 font-medium text-white bg-black rounded-xl sm:mt-10 hover:bg-black/80"
-              onClick={e => generateBio(e)}
+              onClick={e => generatedescription(e)}
               type="button"
             >
               Generate your description &rarr;
@@ -158,34 +155,34 @@ const Home = () => {
         />
         <hr className="h-px bg-gray-700 border-1 dark:bg-gray-700" />
         <div className="my-10 space-y-10">
-          {generatedBios && (
+          {generatedDescription && (
             <>
               <div>
                 <h2
                   className="mx-auto text-3xl font-bold sm:text-4xl text-slate-900"
-                  ref={bioRef}
+                  ref={descriptionRef}
                 >
                   Your generated descriptions
                 </h2>
               </div>
               <div className="flex flex-col items-center justify-center max-w-xl mx-auto space-y-8">
-                {generatedBios
-                  .substring(generatedBios.indexOf('1') + 3)
+                {generatedDescription
+                  .substring(generatedDescription.indexOf('1') + 3)
                   .split('2.')
-                  .map(generatedBio => (
+                  .map(generatedDescriptionItem => (
                     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/interactive-supports-focus
                     <div
                       role="button"
                       className="p-4 transition bg-white border shadow-md rounded-xl hover:bg-gray-100 cursor-copy"
                       onClick={() => {
-                        navigator.clipboard.writeText(generatedBio)
-                        toast('Bio copied to clipboard', {
+                        navigator.clipboard.writeText(generatedDescriptionItem)
+                        toast('Description copied to clipboard', {
                           icon: '✂️',
                         })
                       }}
-                      key={generatedBio}
+                      key={generatedDescriptionItem}
                     >
-                      <p>{generatedBio}</p>
+                      <p>{generatedDescriptionItem}</p>
                     </div>
                   ))}
               </div>
