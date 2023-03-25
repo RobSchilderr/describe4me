@@ -25,3 +25,9 @@ Make sure to check the environment variables, and also add your own Open AI API 
 `OPENAI_API_KEY = "sk-thisisyourkey"`
 
 If you want to see the result of the authentication, go to /login-result
+
+## Login
+
+Comment out the login/register in the `Header.tsx` component if you want an authentication example.
+
+Make sure to use your own Supertokens env variables.

@@ -13,14 +13,14 @@ export default function Header() {
         </h1>
       </Link>
 
-      <div className="hidden space-x-6 sm:block">
+      {/* <div className="hidden space-x-6 sm:block">
         {router.pathname !== '/login' && router.pathname !== '/register' && (
           <Link href="/login">Login</Link>
         )}
         {router.pathname !== '/register' && router.pathname !== '/login' && (
           <Link href="/register">Register</Link>
         )}
-      </div>
+      </div> */}
     </header>
   )
 }
