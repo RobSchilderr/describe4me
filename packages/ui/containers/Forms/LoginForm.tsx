@@ -7,10 +7,13 @@ import { Button } from 'ui/components/Button'
 // import { SavePassword } from 'capacitor-ios-autofill-save-password'
 import { emailPasswordSignIn } from 'supertokens-web-js/recipe/thirdpartyemailpassword'
 import { doesSessionExist } from 'supertokens-web-js/recipe/session'
-import EmailPassword from 'supertokens-web-js/recipe/emailpassword';
-import Passwordless, {} from "supertokens-web-js/recipe/passwordless";
+import EmailPassword from 'supertokens-web-js/recipe/emailpassword'
+import Passwordless from 'supertokens-web-js/recipe/passwordless'
 import { useState } from 'react'
-import { consumePasswordlessCode, createPasswordlessCode } from 'lib/utils/supertokensUtilities'
+import {
+  consumePasswordlessCode,
+  createPasswordlessCode,
+} from 'lib/utils/supertokensUtilities'
 
 export type LoginFormVariables = {
   email: string
@@ -87,7 +90,7 @@ export const LoginForm = ({ redirectUri }: { redirectUri?: string }) => {
     //     password: password,
     //   })
     // }
-    router.push('/login-result')
+    router.push('/')
   }
 
   return (
@@ -176,7 +179,7 @@ export const EmailPasswordLoginForm = () => {
       return
     }
 
-    router.push('/login-result')
+    router.push('/')
   }
 
   return (
@@ -224,11 +227,11 @@ export const EmailPasswordLoginForm = () => {
 
 export const PasswordlessLoginForm = () => {
   const router = useRouter()
-  const [isGettingCode, setIsGettingCode] = useState<boolean>(false);
+  const [isGettingCode, setIsGettingCode] = useState<boolean>(false)
   const [codeResponse, setCodeResponse] = useState<{
-    deviceId: string;
-    preAuthSessionId: string;
-  }>();
+    deviceId: string
+    preAuthSessionId: string
+  }>()
 
   const {
     register,
@@ -240,28 +243,28 @@ export const PasswordlessLoginForm = () => {
     mode: 'onBlur',
   })
 
-  const getPasswordlessCode = async ({email}: LoginFormVariables) => {
-    if (email === undefined || email === "") {
-      return setError("email", {
-        message: "Please enter an email",
+  const getPasswordlessCode = async ({ email }: LoginFormVariables) => {
+    if (email === undefined || email === '') {
+      return setError('email', {
+        message: 'Please enter an email',
       })
     }
 
-    setIsGettingCode(true);
+    setIsGettingCode(true)
     const emailLowerCase = email.toLocaleLowerCase().trim()
-    
-    const response = await createPasswordlessCode(emailLowerCase);
+
+    const response = await createPasswordlessCode(emailLowerCase)
 
     setCodeResponse({
       deviceId: response.deviceId,
       preAuthSessionId: response.preAuthSessionId,
-    });
-    setIsGettingCode(false);
+    })
+    setIsGettingCode(false)
   }
 
   const onSubmit = async ({ password }: LoginFormVariables) => {
     if (codeResponse === undefined) {
-      return;
+      return
     }
 
     const response = await consumePasswordlessCode(password)
@@ -270,23 +273,23 @@ export const PasswordlessLoginForm = () => {
     console.log({ validSession }, 'valid')
     console.log({ response })
 
-    if (response.status === "RESTART_FLOW_ERROR") {
-      return window.location.reload();
+    if (response.status === 'RESTART_FLOW_ERROR') {
+      return window.location.reload()
     }
 
-    if (response.status === "EXPIRED_USER_INPUT_CODE_ERROR") {
-      return setError("password", {
-        message: "Code expired",
-      });
+    if (response.status === 'EXPIRED_USER_INPUT_CODE_ERROR') {
+      return setError('password', {
+        message: 'Code expired',
+      })
     }
 
-    if (response.status === "INCORRECT_USER_INPUT_CODE_ERROR") {
-      return setError("password", {
-        message: "Incorrect code",
-      });
+    if (response.status === 'INCORRECT_USER_INPUT_CODE_ERROR') {
+      return setError('password', {
+        message: 'Incorrect code',
+      })
     }
 
-    router.push('/login-result')
+    router.push('/')
   }
 
   return (
@@ -305,7 +308,11 @@ export const PasswordlessLoginForm = () => {
             register={register('email')}
           />
 
-          <Button type='button' loading={isGettingCode} onClick={handleSubmit(getPasswordlessCode)}>
+          <Button
+            type="button"
+            loading={isGettingCode}
+            onClick={handleSubmit(getPasswordlessCode)}
+          >
             Get Code
           </Button>
         </div>

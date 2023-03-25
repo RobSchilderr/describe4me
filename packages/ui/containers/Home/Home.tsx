@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import { Toaster, toast } from 'react-hot-toast'
 import DropDown, { VibeType } from 'ui/components/DropDown'
-import Github from 'ui/components/GitHub'
 import Header from 'ui/components/Header'
 import LoadingSpinner from 'ui/components/LoadingSpinner'
 import React, { useRef, useState } from 'react'
@@ -119,7 +118,7 @@ const Home = () => {
             onChange={e => setDescription(e.target.value)}
             rows={4}
             className="w-full my-5 border-gray-300 rounded-md shadow-sm focus:border-black focus:ring-black"
-            placeholder="e.g.  a self made herring salad prepared in Amsterdam with the fish from the North Sea. Good to eat with a genever on the side."
+            placeholder="e.g. a self made herring salad prepared in Amsterdam. Recommended with a genever on the side."
           />
           <div className="flex items-center mb-5 space-x-3">
             <img src="/2-black.png" width={30} height={30} alt="1 icon" />
