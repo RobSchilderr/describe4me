@@ -12,6 +12,7 @@ export default function Header() {
           <span>describe4me</span>
         </h1>
       </Link>
+
       <div className="hidden space-x-6 sm:block">
         {router.pathname !== '/login' && router.pathname !== '/register' && (
           <Link href="/login">Login</Link>

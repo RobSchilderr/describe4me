@@ -22,19 +22,19 @@ export default async function redirectAuthUrl(
 
   const code = req.query?.code ?? null
   if (req.query?.provider && code) {
-    let queryClone = { ...req.query }
+    const queryClone = { ...req.query }
     // Remove the provider query since we use that for the path
     delete queryClone.provider
 
     // Create a query string that consumes all current query params from the url
-    let queryParts: string[] = []
+    const queryParts: string[] = []
     Object.keys(queryClone).forEach(key => {
       // We need to URL encode the value of the query to make it URL friendly
       queryParts.push(`${key}=${encodeURIComponent(queryClone[key] as string)}`)
     })
 
     // Combine all current query params in a single string
-    let queryString = queryParts.length === 0 ? '' : queryParts.join('&')
+    const queryString = queryParts.length === 0 ? '' : queryParts.join('&')
 
     const redirectUrl = `${APP_BUNDLE_URL}://auth/callback/${req.query.provider}&${queryString}`
 
