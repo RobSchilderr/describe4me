@@ -20,4 +20,8 @@ It is based on my [starter project](https://github.com/RobSchilderr/capacitor-su
 
 For more info how to use this project, please read the [README.md](https://github.com/RobSchilderr/capacitor-supertokens-nextjs-turborepo) in the starter project.
 
+Make sure to check the environment variables, and also add your own Open AI API Key like:
+
+`OPENAI_API_KEY = "sk-thisisyourkey"`
+
 If you want to see the result of the authentication, go to /login-result
