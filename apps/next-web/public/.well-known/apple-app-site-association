@@ -1,0 +1,14 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "F23PQPA6YX.next.supertokens.app",
+        "paths": [
+          "NOT /api/*",
+          "*"
+        ]
+      }
+    ]
+  }
+}

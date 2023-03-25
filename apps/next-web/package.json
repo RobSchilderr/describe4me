@@ -1,0 +1,42 @@
+{
+  "name": "next-web",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3001",
+    "build": "next build",
+    "start": "next start",
+    "test": "jest --coverage",
+    "lint": "eslint src --fix"
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.7.7",
+    "@heroicons/react": "^2.0.16",
+    "@types/express": "^4.17.15",
+    "@types/node": "^18.7.14",
+    "@types/react": "18.0.1",
+    "@types/react-dom": "18.0.6",
+    "autoprefixer": "^10.4.0",
+    "clsx": "^1.2.1",
+    "config": "*",
+    "eslint": "^8.5.0",
+    "eventsource-parser": "^1.0.0",
+    "lib": "*",
+    "next": "^13.1.1",
+    "nextjs-cors": "^2.1.2",
+    "openai": "^3.2.1",
+    "postcss": "^8.4.4",
+    "qs": "^6.11.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.41.2",
+    "react-hot-toast": "^2.4.0",
+    "react-responsive": "^9.0.2",
+    "supertokens-node": "13.1.2",
+    "supertokens-web-js": "^0.5.0",
+    "tailwindcss": "^3.0.0",
+    "tsconfig": "*",
+    "typescript": "^4.9.4",
+    "ui": "*"
+  }
+}
