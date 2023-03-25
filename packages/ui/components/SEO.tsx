@@ -12,7 +12,7 @@ interface SEOProps {
 const SEO: React.FC<SEOProps> = ({ title, description, image }) => {
   const defaultTitle = 'describe4me'
   const defaultDescription = 'Generate your next description using chatGPT'
-  const defaultImage = `${FRONTEND_URL}/screenshot.png`
+  const defaultImage = `${FRONTEND_URL}/screenshotnew.png`
 
   const seoTitle = title ? `${title} | ${defaultTitle}` : defaultTitle
   const seoDescription = description || defaultDescription
