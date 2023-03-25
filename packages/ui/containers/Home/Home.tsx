@@ -4,6 +4,7 @@ import DropDown, { VibeType } from 'ui/components/DropDown'
 import Header from 'ui/components/Header'
 import LoadingSpinner from 'ui/components/LoadingSpinner'
 import React, { useRef, useState } from 'react'
+import { FRONTEND_URL } from 'lib/utils/config'
 
 const Home = () => {
   const [loading, setLoading] = useState(false)
@@ -34,7 +35,7 @@ const Home = () => {
     setLoading(true)
     try {
       console.log('we here')
-      const response = await fetch('http://localhost:3001/api/generate', {
+      const response = await fetch(`${FRONTEND_URL}/api/generate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

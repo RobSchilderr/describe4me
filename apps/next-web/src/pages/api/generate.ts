@@ -1,4 +1,6 @@
 import { OpenAIStream, OpenAIStreamPayload } from 'lib//utils/OpenAIStream'
+import { authCors } from 'lib/utils/cors'
+import { NextApiRequest, NextApiResponse } from 'next'
 
 if (!process.env.OPENAI_API_KEY) {
   throw new Error('Missing env var from OpenAI')
@@ -8,7 +10,12 @@ export const config = {
   runtime: 'edge',
 }
 
-const handler = async (req: Request): Promise<Response> => {
+const handler = async (
+  req: NextApiRequest & Request,
+  res: NextApiResponse & Response,
+): Promise<Response> => {
+  await authCors(req, res)
+
   const { prompt } = (await req.json()) as {
     prompt?: string
   }
@@ -29,7 +36,6 @@ const handler = async (req: Request): Promise<Response> => {
     n: 1,
   }
   const stream = await OpenAIStream(payload)
-  console.log(stream, 'stream')
   return new Response(stream)
 }
 
